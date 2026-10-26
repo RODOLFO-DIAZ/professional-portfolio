@@ -1,0 +1,11 @@
+/* Design tokens: colors, spacing and typography shared by all stylesheets */
+
+:root {
+    /* Colors */
+    --color-background: #FFFFFF;
+    --color-text: #171717;
+    --color-primary: #6D28D9;
+    --color-secondary: #2563EB;
+    --color-gray: #6B7280;
+    --color-border: #E5E7EB;
+}
