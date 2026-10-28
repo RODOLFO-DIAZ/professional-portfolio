@@ -243,7 +243,27 @@
 
         <!-- Contact -->
         <section id="contact" aria-labelledby="contact-title">
-            <h2 id="contact-title">Contacto</h2>
+            <div class="section-header">
+                <h2 id="contact-title" class="section-title">Contacto</h2>
+                <p class="section-subtitle">Conversemos sobre finanzas, datos y automatización</p>
+            </div>
+
+            <form class="form" action="#contact" aria-describedby="form-note">
+                <div class="form-field">
+                    <label class="form-label" for="contact-name">Nombre</label>
+                    <input class="form-input" type="text" id="contact-name" autocomplete="name" maxlength="80" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="contact-email">Correo electrónico</label>
+                    <input class="form-input" type="email" id="contact-email" autocomplete="email" maxlength="120" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="contact-message">Mensaje</label>
+                    <textarea class="form-input" id="contact-message" rows="5" maxlength="1000" required></textarea>
+                </div>
+                <p id="form-note" class="form-note">Formulario de demostración académica. No envía ni almacena mensajes.</p>
+                <button class="button button-primary" type="submit">Enviar (demostración)</button>
+            </form>
         </section>
     </main>
 
