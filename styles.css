@@ -43,6 +43,7 @@
     --container-padding: var(--space-md);
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
+    --card-gap: var(--space-lg); /* also used in the column width calc() */
 
     /* Stacking */
     --z-header: 100;
@@ -194,7 +195,7 @@ main > section + section {
     flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
-    gap: var(--space-lg);
+    gap: var(--card-gap);
     padding: 0;
     list-style: none;
 }
@@ -454,11 +455,39 @@ footer {
     .nav-list > li + li {
         border-top: 0;
     }
+
+    /* Two columns: half the row minus half the gap (% of the list width) */
+    .soft-skills > li,
+    .skills-list > li,
+    .projects-list > li,
+    .education-list > li {
+        flex-basis: calc((100% - var(--card-gap)) / 2);
+    }
 }
 
 @media (min-width: 1024px) {
     .nav-list {
         gap: var(--space-xl);
+    }
+
+    /* Three columns: a third of the row minus the two gaps */
+    .soft-skills > li,
+    .skills-list > li,
+    .education-list > li {
+        flex-basis: calc((100% - 2 * var(--card-gap)) / 3);
+    }
+
+    /* Project gallery: the three projects share the row equally */
+    .projects-list > li {
+        flex: 1;
+    }
+}
+
+@media (min-width: 1440px) {
+    /* Wider screens: a wider container and more air between cards */
+    :root {
+        --container-max-width: 80rem;
+        --card-gap: var(--space-xl);
     }
 }
 
