@@ -185,6 +185,37 @@ main > section + section {
     padding-block: var(--space-3xl);
 }
 
+/* Card lists: a wrapping flex row; one card per row on mobile, more columns in the media queries */
+.soft-skills,
+.skills-list,
+.projects-list,
+.education-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--space-lg);
+    padding: 0;
+    list-style: none;
+}
+
+/* Skills: spare space is shared around the cards of an incomplete row */
+.skills-list {
+    justify-content: space-around;
+}
+
+.soft-skills > li,
+.skills-list > li,
+.projects-list > li,
+.education-list > li {
+    flex: 0 1 100%;
+}
+
+/* Project cards sit inside their list item, so they fill it to match the row height */
+.projects-list .card {
+    height: 100%;
+}
+
 footer {
     padding-block: var(--space-lg);
     border-top: 1px solid var(--color-border);
