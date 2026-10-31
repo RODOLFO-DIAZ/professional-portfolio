@@ -195,6 +195,102 @@ footer {
     text-decoration: none;
 }
 
+/* Mobile menu toggle: the label acts as the button for the hidden checkbox */
+.nav-toggle-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.75rem; /* 44px minimum touch target */
+    height: 2.75rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.nav-toggle-label:hover {
+    background-color: var(--color-border);
+}
+
+/* Keyboard focus lands on the hidden checkbox, so the outline is drawn on its label */
+.nav-toggle:focus-visible + .nav-toggle-label {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Hamburger icon: three bars drawn with the span and its pseudo-elements */
+.nav-toggle-icon,
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-text);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-toggle-icon {
+    position: relative;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+}
+
+.nav-toggle-icon::before {
+    top: -0.5rem;
+}
+
+.nav-toggle-icon::after {
+    top: 0.5rem;
+}
+
+/* Open state: the bars turn into an X */
+.nav-toggle:checked + .nav-toggle-label .nav-toggle-icon {
+    background-color: transparent;
+}
+
+.nav-toggle:checked + .nav-toggle-label .nav-toggle-icon::before {
+    transform: translateY(0.5rem) rotate(45deg);
+}
+
+.nav-toggle:checked + .nav-toggle-label .nav-toggle-icon::after {
+    transform: translateY(-0.5rem) rotate(-45deg);
+}
+
+/* Navigation: hidden on mobile until the toggle is checked, then full width below the logo */
+.site-nav {
+    display: none;
+    flex-basis: 100%;
+}
+
+.nav-toggle:checked ~ .site-nav {
+    display: block;
+}
+
+.nav-list {
+    padding: 0;
+    list-style: none;
+}
+
+.nav-list > li + li {
+    border-top: 1px solid var(--color-border);
+}
+
+.site-nav a {
+    display: block;
+    padding-block: var(--space-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.site-nav a:hover {
+    color: var(--color-primary);
+}
+
 /* Section header */
 .section-header {
     margin-bottom: var(--space-xl);
@@ -216,8 +312,9 @@ footer {
     color: var(--color-gray);
 }
 
-/* Utility: hides content visually but keeps it for screen readers (1px is the minimum box) */
-.visually-hidden {
+/* Utility: hides content visually but keeps it for screen readers and keyboard (1px is the minimum box) */
+.visually-hidden,
+.nav-toggle {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -237,5 +334,14 @@ footer {
 
     main > section {
         padding-block: var(--space-3xl);
+    }
+}
+
+/* Users who ask for less motion get the icon change without animation */
+@media (prefers-reduced-motion: reduce) {
+    .nav-toggle-icon,
+    .nav-toggle-icon::before,
+    .nav-toggle-icon::after {
+        transition: none;
     }
 }
