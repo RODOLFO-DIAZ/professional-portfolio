@@ -9,6 +9,11 @@
     --color-secondary: #2563EB;
     --color-gray: #6B7280;
     --color-border: #E5E7EB;
+    --color-primary-soft: rgb(237, 233, 254);
+
+    /* Shadows: rgba keeps them translucent over any background (offsets in px are fine details) */
+    --shadow-card: 0 1px 2px rgba(23, 23, 23, 0.06);
+    --shadow-card-hover: 0 12px 24px rgba(23, 23, 23, 0.12);
 
     /* Typography */
     --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -38,9 +43,11 @@
     --container-padding: var(--space-md);
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
+    --card-gap: var(--space-lg); /* also used in the column width calc() */
 
     /* Stacking */
     --z-header: 100;
+    --z-card-hover: 1;
 }
 
 /* === Reset === */
@@ -179,6 +186,37 @@ main > section + section {
     padding-block: var(--space-3xl);
 }
 
+/* Card lists: a wrapping flex row; one card per row on mobile, more columns in the media queries */
+.soft-skills,
+.skills-list,
+.projects-list,
+.education-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--card-gap);
+    padding: 0;
+    list-style: none;
+}
+
+/* Skills: spare space is shared around the cards of an incomplete row */
+.skills-list {
+    justify-content: space-around;
+}
+
+.soft-skills > li,
+.skills-list > li,
+.projects-list > li,
+.education-list > li {
+    flex: 0 1 100%;
+}
+
+/* Project cards sit inside their list item, so they fill it to match the row height */
+.projects-list .card {
+    height: 100%;
+}
+
 footer {
     padding-block: var(--space-lg);
     border-top: 1px solid var(--color-border);
@@ -312,6 +350,66 @@ footer {
     color: var(--color-gray);
 }
 
+/* --- Card --- */
+/* Column layout so the last block (technology tags) can sit at the bottom of equal-height cards */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover: the card lifts above its neighbours */
+.card:hover {
+    z-index: var(--z-card-hover);
+    transform: translateY(-0.25rem);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.card-meta {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-gray);
+}
+
+/* Tag group: a paragraph with one status tag or a list of technologies */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0;
+    list-style: none;
+}
+
+.card > .card-tags:last-child {
+    margin-top: auto;
+    padding-top: var(--space-md);
+}
+
+/* --- Tag --- */
+.tag {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-tight);
+    color: var(--color-gray);
+}
+
+/* Status tag: project or learning stage */
+.tag-status {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-soft);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
 /* Utility: hides content visually but keeps it for screen readers and keyboard (1px is the minimum box) */
 .visually-hidden,
 .nav-toggle {
@@ -357,19 +455,48 @@ footer {
     .nav-list > li + li {
         border-top: 0;
     }
+
+    /* Two columns: half the row minus half the gap (% of the list width) */
+    .soft-skills > li,
+    .skills-list > li,
+    .projects-list > li,
+    .education-list > li {
+        flex-basis: calc((100% - var(--card-gap)) / 2);
+    }
 }
 
 @media (min-width: 1024px) {
     .nav-list {
         gap: var(--space-xl);
     }
+
+    /* Three columns: a third of the row minus the two gaps */
+    .soft-skills > li,
+    .skills-list > li,
+    .education-list > li {
+        flex-basis: calc((100% - 2 * var(--card-gap)) / 3);
+    }
+
+    /* Project gallery: the three projects share the row equally */
+    .projects-list > li {
+        flex: 1;
+    }
 }
 
-/* Users who ask for less motion get the icon change without animation */
+@media (min-width: 1440px) {
+    /* Wider screens: a wider container and more air between cards */
+    :root {
+        --container-max-width: 80rem;
+        --card-gap: var(--space-xl);
+    }
+}
+
+/* Users who ask for less motion get the state changes without animation */
 @media (prefers-reduced-motion: reduce) {
     .nav-toggle-icon,
     .nav-toggle-icon::before,
-    .nav-toggle-icon::after {
+    .nav-toggle-icon::after,
+    .card {
         transition: none;
     }
 }
