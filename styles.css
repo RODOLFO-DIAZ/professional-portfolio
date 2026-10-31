@@ -1,6 +1,46 @@
-/* Global styles, base elements and page layout (mobile first) */
+/* Portfolio stylesheet (mobile first). Sections: Variables, Reset, Base, Layout, Components, Media queries */
 
-/* Reset */
+/* === Variables === */
+:root {
+    /* Colors */
+    --color-background: #FFFFFF;
+    --color-text: #171717;
+    --color-primary: #6D28D9;
+    --color-secondary: #2563EB;
+    --color-gray: #6B7280;
+    --color-border: #E5E7EB;
+
+    /* Typography */
+    --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);
+    --font-size-3xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --line-height-tight: 1.2;
+    --line-height-base: 1.6;
+
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* Layout */
+    --container-max-width: 72rem;
+    --container-padding: var(--space-md);
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+}
+
+/* === Reset === */
 *,
 *::before,
 *::after {
@@ -30,7 +70,7 @@ button {
     font: inherit;
 }
 
-/* Base elements */
+/* === Base === */
 body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -96,6 +136,7 @@ h4 + * {
     margin-top: var(--space-xl);
 }
 
+/* === Layout === */
 /* Page layout: side padding grows to center content up to the max width */
 header,
 main > section,
@@ -131,6 +172,29 @@ footer {
     text-align: center;
 }
 
+/* === Components === */
+/* Section header */
+.section-header {
+    margin-bottom: var(--space-xl);
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 0.25rem;
+    margin-top: var(--space-sm);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-primary);
+}
+
+.section-subtitle {
+    margin-top: var(--space-md);
+    font-size: var(--font-size-lg);
+    color: var(--color-gray);
+}
+
+/* === Media queries === */
 @media (min-width: 768px) {
     :root {
         --container-padding: var(--space-xl);
