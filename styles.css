@@ -9,6 +9,11 @@
     --color-secondary: #2563EB;
     --color-gray: #6B7280;
     --color-border: #E5E7EB;
+    --color-primary-soft: rgb(237, 233, 254);
+
+    /* Shadows: rgba keeps them translucent over any background (offsets in px are fine details) */
+    --shadow-card: 0 1px 2px rgba(23, 23, 23, 0.06);
+    --shadow-card-hover: 0 12px 24px rgba(23, 23, 23, 0.12);
 
     /* Typography */
     --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -41,6 +46,7 @@
 
     /* Stacking */
     --z-header: 100;
+    --z-card-hover: 1;
 }
 
 /* === Reset === */
@@ -312,6 +318,66 @@ footer {
     color: var(--color-gray);
 }
 
+/* --- Card --- */
+/* Column layout so the last block (technology tags) can sit at the bottom of equal-height cards */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover: the card lifts above its neighbours */
+.card:hover {
+    z-index: var(--z-card-hover);
+    transform: translateY(-0.25rem);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.card-meta {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-gray);
+}
+
+/* Tag group: a paragraph with one status tag or a list of technologies */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0;
+    list-style: none;
+}
+
+.card > .card-tags:last-child {
+    margin-top: auto;
+    padding-top: var(--space-md);
+}
+
+/* --- Tag --- */
+.tag {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-tight);
+    color: var(--color-gray);
+}
+
+/* Status tag: project or learning stage */
+.tag-status {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-soft);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
 /* Utility: hides content visually but keeps it for screen readers and keyboard (1px is the minimum box) */
 .visually-hidden,
 .nav-toggle {
@@ -365,11 +431,12 @@ footer {
     }
 }
 
-/* Users who ask for less motion get the icon change without animation */
+/* Users who ask for less motion get the state changes without animation */
 @media (prefers-reduced-motion: reduce) {
     .nav-toggle-icon,
     .nav-toggle-icon::before,
-    .nav-toggle-icon::after {
+    .nav-toggle-icon::after,
+    .card {
         transition: none;
     }
 }
