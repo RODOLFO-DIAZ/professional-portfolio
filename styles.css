@@ -335,6 +335,34 @@ footer {
     main > section {
         padding-block: var(--space-3xl);
     }
+
+    /* Horizontal menu: the toggle is no longer needed */
+    .nav-toggle,
+    .nav-toggle-label {
+        display: none;
+    }
+
+    .site-nav {
+        display: block;
+        flex-basis: auto;
+    }
+
+    .nav-list {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: var(--space-lg);
+    }
+
+    .nav-list > li + li {
+        border-top: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav-list {
+        gap: var(--space-xl);
+    }
 }
 
 /* Users who ask for less motion get the icon change without animation */
