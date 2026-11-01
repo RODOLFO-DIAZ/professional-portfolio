@@ -410,6 +410,47 @@ footer {
     color: var(--color-primary);
 }
 
+/* --- Button --- */
+/* Shared by <a> and <button>; 2.75rem keeps the 44px minimum touch target */
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: var(--space-sm) var(--space-lg);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Pressed: a 1px nudge gives physical feedback */
+.button:active {
+    transform: translateY(1px);
+}
+
+/* Primary: white text on the accent (7.1:1 on purple, 5.2:1 on blue on hover) */
+.button-primary {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+
+/* Also overrides a:hover, which would turn the text blue */
+.button-primary:hover {
+    border-color: var(--color-secondary);
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+}
+
 /* Utility: hides content visually but keeps it for screen readers and keyboard (1px is the minimum box) */
 .visually-hidden,
 .nav-toggle {
@@ -496,7 +537,8 @@ footer {
     .nav-toggle-icon,
     .nav-toggle-icon::before,
     .nav-toggle-icon::after,
-    .card {
+    .card,
+    .button {
         transition: none;
     }
 }
