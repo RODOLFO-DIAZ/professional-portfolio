@@ -451,6 +451,53 @@ footer {
     color: var(--color-background);
 }
 
+/* --- Form --- */
+/* Stacked fields: label above its input, even spacing between fields */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.form-label {
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Gray border: 4.8:1 on white, above the 3:1 needed to see the field edge */
+.form-input {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+/* Message box: only grows in height so it never breaks the layout */
+textarea.form-input {
+    resize: vertical;
+}
+
+.form-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray);
+}
+
+/* The submit button keeps its own width instead of stretching */
+.form > .button {
+    align-self: flex-start;
+}
+
+.form + .contact-alt {
+    margin-top: var(--space-xl);
+}
+
 /* Utility: hides content visually but keeps it for screen readers and keyboard (1px is the minimum box) */
 .visually-hidden,
 .nav-toggle {
