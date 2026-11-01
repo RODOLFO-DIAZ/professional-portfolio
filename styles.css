@@ -10,6 +10,7 @@
     --color-gray: #6B7280;
     --color-border: #E5E7EB;
     --color-primary-soft: rgb(237, 233, 254);
+    --color-error: #B91C1C;
 
     /* Shadows: rgba keeps them translucent over any background (offsets in px are fine details) */
     --shadow-card: 0 1px 2px rgba(23, 23, 23, 0.06);
@@ -44,6 +45,7 @@
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --card-gap: var(--space-lg); /* also used in the column width calc() */
+    --form-max-width: 40rem; /* rem: about 70 characters per line in the message box */
 
     /* Stacking */
     --z-header: 100;
@@ -410,6 +412,116 @@ footer {
     color: var(--color-primary);
 }
 
+/* --- Button --- */
+/* Shared by <a> and <button>; 2.75rem keeps the 44px minimum touch target */
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: var(--space-sm) var(--space-lg);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Pressed: a 1px nudge gives physical feedback */
+.button:active {
+    transform: translateY(1px);
+}
+
+/* Primary: white text on the accent (7.1:1 on purple, 5.2:1 on blue on hover) */
+.button-primary {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+
+/* Also overrides a:hover, which would turn the text blue */
+.button-primary:hover {
+    border-color: var(--color-secondary);
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+}
+
+/* --- Form --- */
+/* Stacked fields: label above its input, even spacing between fields.
+   Full width on phones; the max width only kicks in on wider screens */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    max-width: var(--form-max-width);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.form-label {
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Gray border: 4.8:1 on white, above the 3:1 needed to see the field edge */
+.form-input {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+.form-input:hover {
+    border-color: var(--color-text);
+}
+
+/* :focus, not :focus-visible: text fields show the ring for mouse users too */
+.form-input:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-color: var(--color-primary);
+}
+
+/* :user-invalid waits until the visitor has edited the field, so empty fields are not red on load */
+.form-input:user-invalid {
+    border-color: var(--color-error);
+}
+
+.form-input:user-invalid:focus {
+    outline-color: var(--color-error);
+}
+
+/* Message box: only grows in height so it never breaks the layout */
+textarea.form-input {
+    resize: vertical;
+}
+
+.form-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray);
+}
+
+/* The submit button keeps its own width instead of stretching */
+.form > .button {
+    align-self: flex-start;
+}
+
+.form + .contact-alt {
+    margin-top: var(--space-xl);
+}
+
 /* Utility: hides content visually but keeps it for screen readers and keyboard (1px is the minimum box) */
 .visually-hidden,
 .nav-toggle {
@@ -496,7 +608,8 @@ footer {
     .nav-toggle-icon,
     .nav-toggle-icon::before,
     .nav-toggle-icon::after,
-    .card {
+    .card,
+    .button {
         transition: none;
     }
 }
