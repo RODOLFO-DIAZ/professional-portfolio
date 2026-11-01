@@ -10,6 +10,7 @@
     --color-gray: #6B7280;
     --color-border: #E5E7EB;
     --color-primary-soft: rgb(237, 233, 254);
+    --color-error: #B91C1C;
 
     /* Shadows: rgba keeps them translucent over any background (offsets in px are fine details) */
     --shadow-card: 0 1px 2px rgba(23, 23, 23, 0.06);
@@ -477,6 +478,26 @@ footer {
     border-radius: var(--radius-md);
     background-color: var(--color-background);
     color: var(--color-text);
+}
+
+.form-input:hover {
+    border-color: var(--color-text);
+}
+
+/* :focus, not :focus-visible: text fields show the ring for mouse users too */
+.form-input:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-color: var(--color-primary);
+}
+
+/* :user-invalid waits until the visitor has edited the field, so empty fields are not red on load */
+.form-input:user-invalid {
+    border-color: var(--color-error);
+}
+
+.form-input:user-invalid:focus {
+    outline-color: var(--color-error);
 }
 
 /* Message box: only grows in height so it never breaks the layout */
