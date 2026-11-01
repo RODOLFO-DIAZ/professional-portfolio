@@ -45,6 +45,7 @@
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --card-gap: var(--space-lg); /* also used in the column width calc() */
+    --form-max-width: 40rem; /* rem: about 70 characters per line in the message box */
 
     /* Stacking */
     --z-header: 100;
@@ -453,11 +454,13 @@ footer {
 }
 
 /* --- Form --- */
-/* Stacked fields: label above its input, even spacing between fields */
+/* Stacked fields: label above its input, even spacing between fields.
+   Full width on phones; the max width only kicks in on wider screens */
 .form {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
+    max-width: var(--form-max-width);
 }
 
 .form-field {
