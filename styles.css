@@ -11,6 +11,9 @@
     --color-border: #E5E7EB;
     --color-primary-soft: rgb(237, 233, 254);
     --color-error: #B91C1C;
+    /* Translucent accents for the hero decoration: rgba lets the white background show through */
+    --color-secondary-glow: rgba(37, 99, 235, 0.12);
+    --color-primary-faint: rgba(109, 40, 217, 0.15);
 
     /* Shadows: rgba keeps them translucent over any background (offsets in px are fine details) */
     --shadow-card: 0 1px 2px rgba(23, 23, 23, 0.06);
@@ -47,7 +50,10 @@
     --card-gap: var(--space-lg); /* also used in the column width calc() */
     --form-max-width: 40rem; /* rem: about 70 characters per line in the message box */
 
+    --header-height: 5rem; /* approximate sticky header height, used for anchors and the hero */
+
     /* Stacking */
+    --z-decoration: -1; /* behind the content of its own section */
     --z-header: 100;
     --z-card-hover: 1;
 }
@@ -175,17 +181,48 @@ main > section {
     padding-block: var(--space-2xl);
 }
 
-/* Anchor targets stop below the sticky header (5rem ≈ header height) */
+/* Anchor targets stop below the sticky header */
 section[id] {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: var(--header-height);
 }
 
 main > section + section {
     border-top: 1px solid var(--color-border);
 }
 
+/* Hero: fills the first screen below the header (vh) and centers its content vertically.
+   Two background layers: a blue glow in the top right corner over a lavender-to-white gradient.
+   isolation creates a stacking context, so the ::before with a negative z-index stays
+   behind the text but above the hero background. */
 .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - var(--header-height));
     padding-block: var(--space-3xl);
+    background-color: var(--color-background);
+    background-image:
+        radial-gradient(circle, var(--color-secondary-glow), transparent 70%),
+        linear-gradient(135deg, var(--color-primary-soft), var(--color-background) 60%);
+    background-repeat: no-repeat;
+    background-size: 40rem 40rem, 100% 100%;
+    background-position: right -12rem top -12rem, center;
+}
+
+/* Decorative ring in the bottom left corner; overflow: hidden on the hero clips it */
+.hero::before {
+    content: "";
+    position: absolute;
+    left: -5rem;
+    bottom: -5rem;
+    z-index: var(--z-decoration);
+    width: 16rem;
+    height: 16rem;
+    border: 2px solid var(--color-primary-faint);
+    border-radius: 50%;
 }
 
 /* Card lists: a wrapping flex row; one card per row on mobile, more columns in the media queries */
