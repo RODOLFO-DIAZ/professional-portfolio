@@ -265,13 +265,6 @@ main > section + section {
     box-shadow: var(--shadow-card-hover);
 }
 
-.hero-caption {
-    margin-top: var(--space-sm);
-    text-align: center;
-    font-size: var(--font-size-sm);
-    color: var(--color-gray);
-}
-
 /* Card lists: a wrapping flex row; one card per row on mobile, more columns in the media queries */
 .soft-skills,
 .skills-list,
