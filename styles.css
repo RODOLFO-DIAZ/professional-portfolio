@@ -555,9 +555,28 @@ main > section + section {
     list-style: none;
 }
 
-.card > .card-tags:last-child {
+/* Technology list: margin-top auto pushes it and the link after it to the bottom of equal-height cards */
+.card > ul.card-tags {
     margin-top: auto;
     padding-top: var(--space-md);
+}
+
+/* Text link at the end of a card; the arrow nudges right on hover.
+   As an inline-block the arrow stays out of the underline, and its margin replaces a space */
+.card-link {
+    align-self: flex-start;
+    margin-top: var(--space-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.card-link-arrow {
+    display: inline-block;
+    margin-left: var(--space-xs);
+    transition: transform 0.2s ease;
+}
+
+.card-link:hover .card-link-arrow {
+    transform: translateX(0.25rem);
 }
 
 /* --- Tag --- */
@@ -806,6 +825,7 @@ textarea.form-input {
     .nav-toggle-icon::before,
     .nav-toggle-icon::after,
     .card,
+    .card-link-arrow,
     .button {
         transition: none;
     }
