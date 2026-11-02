@@ -1,5 +1,13 @@
 /* Portfolio stylesheet (mobile first). Sections: Variables, Reset, Base, Layout, Components, Media queries */
 
+/* Units:
+   - rem: font sizes, spacing and component sizes, so they follow the visitor's browser font setting
+   - em: letter spacing and underline offset, which scale with the text they belong to
+   - px: borders, outlines and shadow offsets, thin details that should stay crisp at any size
+   - %: widths relative to the parent (full-width images, card columns, gradient layers)
+   - vh: the hero fills the first screen; vw: the clamp() headings grow with the screen width
+   - calc(): mixes units, such as card columns minus the gap or the screen height minus the header */
+
 /* === Variables === */
 :root {
     /* Colors */
