@@ -32,6 +32,7 @@
     --font-weight-bold: 700;
     --line-height-tight: 1.2;
     --line-height-base: 1.6;
+    --letter-spacing-wide: 0.08em; /* em: the spacing scales with each label's font size */
 
     /* Spacing */
     --space-xs: 0.25rem;
@@ -223,6 +224,30 @@ main > section + section {
     height: 16rem;
     border: 2px solid var(--color-primary-faint);
     border-radius: 50%;
+}
+
+/* Hero text: small uppercase label, role, motto in italics and a summary that opens in bold */
+.hero-eyebrow {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-primary);
+}
+
+.hero-role {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.hero-tagline {
+    font-size: var(--font-size-lg);
+    font-style: italic;
+}
+
+/* ::first-line follows the text wrap, so the bold lead-in adapts to every screen width */
+.hero-summary::first-line {
+    font-weight: var(--font-weight-semibold);
 }
 
 /* Card lists: a wrapping flex row; one card per row on mobile, more columns in the media queries */
@@ -446,6 +471,8 @@ footer {
     border-color: var(--color-primary);
     background-color: var(--color-primary-soft);
     font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
     color: var(--color-primary);
 }
 
