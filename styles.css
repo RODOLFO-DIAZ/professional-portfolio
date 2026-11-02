@@ -250,6 +250,21 @@ main > section + section {
     font-weight: var(--font-weight-semibold);
 }
 
+/* Profile illustration: centered below the text on mobile, beside it from 1024px */
+.hero-figure {
+    align-self: center;
+    width: 100%;
+    max-width: 16rem;
+    margin-top: var(--space-2xl);
+}
+
+/* Round portrait with a white border that separates it from the gradient */
+.hero-image {
+    border: 0.25rem solid var(--color-background);
+    border-radius: 50%;
+    box-shadow: var(--shadow-card-hover);
+}
+
 /* Card lists: a wrapping flex row; one card per row on mobile, more columns in the media queries */
 .soft-skills,
 .skills-list,
@@ -383,8 +398,9 @@ main > section + section {
     list-style: none;
 }
 
-.nav-list > li + li {
-    border-top: 1px solid var(--color-border);
+/* Separator below every menu item except the last one */
+.nav-list > li:not(:last-child) {
+    border-bottom: 1px solid var(--color-border);
 }
 
 .site-nav a {
@@ -488,7 +504,7 @@ main > section + section {
 }
 
 /* --- Card --- */
-/* Column layout so the last block (technology tags) can sit at the bottom of equal-height cards */
+/* Column layout so the closing blocks (technology tags, link) can sit at the bottom of equal-height cards */
 .card {
     position: relative;
     display: flex;
@@ -508,6 +524,23 @@ main > section + section {
     box-shadow: var(--shadow-card-hover);
 }
 
+/* Project illustration at the top of the card; the title keeps a shorter gap below it */
+.card-image {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+.card-caption {
+    margin-top: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray);
+}
+
+.card-figure + .card-title {
+    margin-top: var(--space-md);
+}
+
 .card-meta {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
@@ -523,9 +556,28 @@ main > section + section {
     list-style: none;
 }
 
-.card > .card-tags:last-child {
+/* Technology list: margin-top auto pushes it and the link after it to the bottom of equal-height cards */
+.card > ul.card-tags {
     margin-top: auto;
     padding-top: var(--space-md);
+}
+
+/* Text link at the end of a card; the arrow nudges right on hover.
+   As an inline-block the arrow stays out of the underline, and its margin replaces a space */
+.card-link {
+    align-self: flex-start;
+    margin-top: var(--space-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.card-link-arrow {
+    display: inline-block;
+    margin-left: var(--space-xs);
+    transition: transform 0.2s ease;
+}
+
+.card-link:hover .card-link-arrow {
+    transform: translateX(0.25rem);
 }
 
 /* --- Tag --- */
@@ -701,8 +753,8 @@ textarea.form-input {
         gap: var(--space-lg);
     }
 
-    .nav-list > li + li {
-        border-top: 0;
+    .nav-list > li:not(:last-child) {
+        border-bottom: 0;
     }
 
     /* Two columns: half the row minus half the gap (% of the list width) */
@@ -727,6 +779,24 @@ textarea.form-input {
 @media (min-width: 1024px) {
     .nav-list {
         gap: var(--space-xl);
+    }
+
+    /* Hero in two columns: the text takes the spare space, the portrait keeps a fixed width */
+    .hero {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-3xl);
+    }
+
+    .hero-content {
+        flex: 1;
+    }
+
+    .hero-figure {
+        flex: 0 0 20rem;
+        max-width: none;
+        margin-top: 0;
     }
 
     /* Three columns: a third of the row minus the two gaps */
@@ -756,6 +826,7 @@ textarea.form-input {
     .nav-toggle-icon::before,
     .nav-toggle-icon::after,
     .card,
+    .card-link-arrow,
     .button {
         transition: none;
     }
