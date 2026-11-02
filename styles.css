@@ -250,6 +250,28 @@ main > section + section {
     font-weight: var(--font-weight-semibold);
 }
 
+/* Profile illustration: centered below the text on mobile, beside it from 1024px */
+.hero-figure {
+    align-self: center;
+    width: 100%;
+    max-width: 16rem;
+    margin-top: var(--space-2xl);
+}
+
+/* Round portrait with a white border that separates it from the gradient */
+.hero-image {
+    border: 0.25rem solid var(--color-background);
+    border-radius: 50%;
+    box-shadow: var(--shadow-card-hover);
+}
+
+.hero-caption {
+    margin-top: var(--space-sm);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray);
+}
+
 /* Card lists: a wrapping flex row; one card per row on mobile, more columns in the media queries */
 .soft-skills,
 .skills-list,
@@ -727,6 +749,24 @@ textarea.form-input {
 @media (min-width: 1024px) {
     .nav-list {
         gap: var(--space-xl);
+    }
+
+    /* Hero in two columns: the text takes the spare space, the portrait keeps a fixed width */
+    .hero {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-3xl);
+    }
+
+    .hero-content {
+        flex: 1;
+    }
+
+    .hero-figure {
+        flex: 0 0 20rem;
+        max-width: none;
+        margin-top: 0;
     }
 
     /* Three columns: a third of the row minus the two gaps */
