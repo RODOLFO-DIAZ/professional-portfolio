@@ -727,8 +727,12 @@ textarea.form-input {
 
 /* === Media queries === */
 @media (min-width: 768px) {
+    /* Larger body text: tablets are read from further away than phones */
     :root {
         --container-padding: var(--space-xl);
+        --font-size-base: 1.0625rem;
+        --font-size-lg: 1.1875rem;
+        --font-size-xl: 1.375rem;
     }
 
     main > section {
@@ -813,10 +817,13 @@ textarea.form-input {
 }
 
 @media (min-width: 1440px) {
-    /* Wider screens: a wider container and more air between cards */
+    /* Wider screens: a wider container, more air between cards and larger headings,
+       which pass the cap the clamp() keeps on smaller screens */
     :root {
         --container-max-width: 80rem;
         --card-gap: var(--space-xl);
+        --font-size-2xl: 2.125rem;
+        --font-size-3xl: 3.5rem;
     }
 }
 
