@@ -281,12 +281,18 @@ main > section + section {
     height: 100%;
 }
 
-footer {
-    padding-block: var(--space-lg);
+.site-footer {
+    padding-block: var(--space-2xl) var(--space-lg);
     border-top: 1px solid var(--color-border);
     font-size: var(--font-size-sm);
     color: var(--color-gray);
-    text-align: center;
+}
+
+/* Footer columns (identity, sections, social): stacked on mobile, a row from 768px */
+.footer-columns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
 }
 
 /* === Components === */
@@ -443,6 +449,42 @@ footer {
 
 .soft-skills > .card:nth-child(even) {
     border-top-color: var(--color-secondary);
+}
+
+/* --- Footer --- */
+.footer-title {
+    margin-bottom: var(--space-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+}
+
+.footer-list {
+    padding: 0;
+    list-style: none;
+}
+
+/* Vertical padding enlarges the touch target of each link */
+.footer-list a {
+    display: inline-block;
+    padding-block: var(--space-xs);
+    text-decoration: none;
+}
+
+/* Links inside running text keep their underline, so color is not the only cue */
+.site-footer a {
+    color: var(--color-text);
+}
+
+.site-footer a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.footer-copy {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
 }
 
 /* --- Card --- */
@@ -669,6 +711,16 @@ textarea.form-input {
     .projects-list > li,
     .education-list > li {
         flex-basis: calc((100% - var(--card-gap)) / 2);
+    }
+
+    /* Footer: the three columns share the row equally */
+    .footer-columns {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer-column {
+        flex: 1;
     }
 }
 
