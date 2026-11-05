@@ -5,8 +5,17 @@ Academic project built with semantic HTML5 and CSS3 only, without JavaScript or 
 The site content is in Spanish.
 
 - **Live site:** https://rodolfo-diaz.github.io/professional-portfolio/
-- **Video presentation:** _link will be added after recording_
+- **Video presentation:** https://youtu.be/juXCBD9Uh5g
 - **LinkedIn:** https://cr.linkedin.com/in/rodolfod%C3%ADazsolano
+
+## Video presentation
+
+A two-minute [video](https://youtu.be/juXCBD9Uh5g) explains two design decisions taken in the project:
+
+1. **Design tokens: scalability and maintenance.** Colors, type scale, spacing and z-index layers
+   are defined once as CSS custom properties, so a change in one place updates the whole site.
+2. **Menu without JavaScript: simplicity and robustness.** The mobile menu relies on a hidden
+   checkbox and its `<label>`, so it works with HTML and CSS only and has no scripts to fail.
 
 ## Sections
 
